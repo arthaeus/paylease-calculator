@@ -20,9 +20,6 @@ class Calculator implements \SPLSubject
         $container->register( new CalculatorProvider() );
         $this->IOutput = new \SPLObjectStorage();
 
-        $this->mathProblem = new \stdClass();
-        $this->mathProblem
-            ->expression = "2 3 ^";
     }
 
     public function setMathProblem( \stdClass $problem )

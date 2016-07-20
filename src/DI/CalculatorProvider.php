@@ -6,13 +6,19 @@ use \Pimple\Container;
 
 class CalculatorProvider implements \Pimple\ServiceProviderInterface
 {
-    public function register(Container $pimple)
+    public static function config()
     {
- 
         $configDir = __DIR__ . '/../config/*.ini';
         $files = glob( $configDir , GLOB_BRACE);
         $settings = \Zend\Config\Factory::fromFiles($files);
+        return $settings;
+    }
 
+    public function register(Container $pimple)
+    {
+
+        $settings = self::config();
+ 
         $pimple['IOutput']          = function ($c) use ($settings) {
             $IOutputNamespace       = "\\Output\\";
             $IOutputClassArray      = $settings['dev']['application']['IOutput'];
@@ -45,6 +51,10 @@ class CalculatorProvider implements \Pimple\ServiceProviderInterface
             $ICalculatorNamespace  = "\\Calculator\\";
             $ICalculatorClass      = $ICalculatorNamespace . "Calculator";
             $ICalculator = new $ICalculatorClass();
+            $mathProblem = new \stdClass();
+            $mathProblem->expression = $settings['dev']['application']['MathProblem'];
+            $ICalculator->setMathProblem( $mathProblem );
+
             $ICalculator->setIAlgorithm($c['IAlgorithm']);
             $IOutputs = $c['IOutput'];
             foreach( $IOutputs as $key => $IOutput )
