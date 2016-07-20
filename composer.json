@@ -16,6 +16,10 @@
             "type": "git"
         },
         {
+            "url": "https://github.com/arthaeus/paylease-output-email.git",
+            "type": "git"
+        },
+        {
             "url": "https://github.com/arthaeus/paylease-output.git",
             "type": "git"
         }
@@ -25,6 +29,7 @@
     "require": {
         "arthaeus/paylease-algorithms": "dev-master",
         "arthaeus/paylease-output": "dev-master",
+        "arthaeus/paylease-output-email": "dev-master",
         "pimple/pimple": "~3.0",
         "zendframework/zend-config": "^2.6",
         "zendframework/zend-servicemanager": "^3.1",

@@ -13,10 +13,32 @@ class CalculatorProvider implements \Pimple\ServiceProviderInterface
         $files = glob( $configDir , GLOB_BRACE);
         $settings = \Zend\Config\Factory::fromFiles($files);
 
-        $pimple['IOutput'] = function ($c) use ($settings) {
-            $IOutputNamespace  = "\\Output\\";
-            $IOutputClass      = $IOutputNamespace . $settings['dev']['application']['IOutput'];
-            return  new $IOutputClass();
+        $pimple['IOutput']          = function ($c) use ($settings) {
+            $IOutputNamespace       = "\\Output\\";
+            $IOutputClassArray      = $settings['dev']['application']['IOutput'];
+            $IOutputArray = array();
+            //application.IOutput.EmailOutput.EmailClass
+
+            foreach( $IOutputClassArray as $key => $IOutputClassName )
+            {
+                $IOutputClass = $IOutputNamespace . $IOutputClassName;
+
+                /**
+                 * if the class implements IEmail, then we need to set its emailer class
+                 */
+
+                $IOut = new $IOutputClass();
+
+                if( in_array( 'Output\IEmail' ,class_implements( $IOut ) ) )
+                {
+                    $IEmailClassName = $settings['email']['application']['EmailClass'];
+                    $IEmailClass = new $IEmailClassName();
+                    $IOut->setEmailer( $IEmailClass );
+                }
+
+                $IOutputArray[] = $IOut;
+            }
+            return $IOutputArray;
         };
 
         $pimple['ICalculator'] = function ($c) use ($settings) {
@@ -24,7 +46,12 @@ class CalculatorProvider implements \Pimple\ServiceProviderInterface
             $ICalculatorClass      = $ICalculatorNamespace . "Calculator";
             $ICalculator = new $ICalculatorClass();
             $ICalculator->setIAlgorithm($c['IAlgorithm']);
-            $ICalculator->setIOutput($c['IOutput']);
+            $IOutputs = $c['IOutput'];
+            foreach( $IOutputs as $key => $IOutput )
+            {
+                $ICalculator->setIOutput( $IOutput );
+            }
+
             return $ICalculator;
         };
 
