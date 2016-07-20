@@ -16,6 +16,10 @@
             "type": "git"
         },
         {
+            "url": "https://github.com/arthaeus/paylease-algorithms-soap.git",
+            "type": "git"
+        },
+        {
             "url": "https://github.com/arthaeus/paylease-output-email.git",
             "type": "git"
         },
@@ -28,6 +32,7 @@
 
     "require": {
         "arthaeus/paylease-algorithms": "dev-master",
+        "arthaeus/paylease-algorithms-soap": "dev-master",
         "arthaeus/paylease-output": "dev-master",
         "arthaeus/paylease-output-email": "dev-master",
         "pimple/pimple": "~3.0",

@@ -52,9 +52,18 @@ class CalculatorProvider implements \Pimple\ServiceProviderInterface
             $ICalculatorClass      = $ICalculatorNamespace . "Calculator";
             $ICalculator = new $ICalculatorClass();
             $mathProblem = new \stdClass();
-            $mathProblem->expression = $settings['dev']['application']['MathProblem'];
-            $ICalculator->setMathProblem( $mathProblem );
 
+            if( $settings['dev']['application']['IAlgorithm'] == "Rpn" )
+            {
+                $mathProblem->expression = $settings['dev']['application']['MathProblem'];
+            }
+            else if( $settings['dev']['application']['IAlgorithm'] == "Soap" )
+            {
+                $mathProblem->x = $settings['dev']['application']['Soap']['addX'];
+                $mathProblem->y = $settings['dev']['application']['Soap']['addY'];
+            }
+
+            $ICalculator->setMathProblem( $mathProblem );
             $ICalculator->setIAlgorithm($c['IAlgorithm']);
             $IOutputs = $c['IOutput'];
             foreach( $IOutputs as $key => $IOutput )
