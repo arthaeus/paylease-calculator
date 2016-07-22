@@ -67,7 +67,9 @@ class CalculatorProvider implements \Pimple\ServiceProviderInterface
              */
             if( $settings['dev']['application']['IInput'] == "IniInput" )
             {
-                $ICalculator->setIInput( $c['IniInput'] );
+                $iniInput =  $c['IniInput'];
+                $iniInput->setICalculator( $ICalculator );
+                $ICalculator->setIInput( $iniInput );
             }
 
             $ICalculator->setIAlgorithm($c['IAlgorithm']);
