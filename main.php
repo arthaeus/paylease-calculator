@@ -11,3 +11,7 @@ $container->register( new CalculatorProvider() );
 $ICalculator = $container['ICalculator'];
 
 $ICalculator->run();
+
+$ICalculator->setIAlgorithm($container['IAlgorithmSoap']);
+
+$ICalculator->run();

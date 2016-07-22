@@ -82,6 +82,13 @@ class CalculatorProvider implements \Pimple\ServiceProviderInterface
             return $ICalculator;
         };
 
+        $pimple['IAlgorithmSoap'] = function ($c) use ($settings) {
+            return new \Algorithm\Soap();
+        };
+
+        $pimple['IAlgorithmRpn'] = function ($c) use ($settings) {
+            return new \Algorithm\Rpn();
+        };
 
         $pimple['IAlgorithm'] = function ($c) use ($settings) {
             $IAlgorithmNamespace  = "\\Algorithm\\";
