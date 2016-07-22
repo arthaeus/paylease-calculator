@@ -9,6 +9,5 @@ $container = new Container();
 $container->register( new CalculatorProvider() );
 
 $ICalculator = $container['ICalculator'];
-//$IAlgorithm = new Algorithm\RPN\Rpn();
 
 $ICalculator->run();

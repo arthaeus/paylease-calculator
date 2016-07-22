@@ -10,8 +10,8 @@ class Calculator implements \SPLSubject
 
     protected $IAlgorithm  = null;
     protected $IOutput     = null;
+    protected $IInput      = null;
     protected $message     = null;
-    protected $mathProblem = null;
 
 
     public function __construct()
@@ -19,7 +19,17 @@ class Calculator implements \SPLSubject
         $container = new Container();
         $container->register( new CalculatorProvider() );
         $this->IOutput = new \SPLObjectStorage();
+    }
 
+    public function setIInput( \Input\IInput $IInput )
+    {
+        $this->IInput = $IInput;
+        return $this;
+    }
+
+    public function getIInput()
+    {
+        return $this->IInput;
     }
 
     public function setMathProblem( \stdClass $problem )
@@ -68,7 +78,12 @@ class Calculator implements \SPLSubject
 
     public function run()
     {
-        $this->message = $this->IAlgorithm->calculate($this->mathProblem);
+        /**
+         * at this point, run the input class input() method and this will populate the math problem to the input
+         */
+
+        $this->IInput->input(new \stdClass());
+        $this->message = $this->IAlgorithm->calculate($this->IInput->getMathProblem());
         $this->notify();
     }
 
