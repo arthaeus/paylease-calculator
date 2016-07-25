@@ -81,7 +81,7 @@ class Calculator implements \SPLSubject
         /**
          * at this point, run the input class input() method and this will populate the math problem to the input
          */
-        $this->IInput->input(new \stdClass());
+        $this->IInput->input($input);
     }
 
     public function run()

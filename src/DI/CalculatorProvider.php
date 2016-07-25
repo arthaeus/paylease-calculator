@@ -83,7 +83,7 @@ class CalculatorProvider implements \Pimple\ServiceProviderInterface
         };
 
         $pimple['IAlgorithmSoap'] = function ($c) use ($settings) {
-            return new \Algorithm\Soap();
+            return new \Algorithm\SoapMath();
         };
 
         $pimple['IAlgorithmRpn'] = function ($c) use ($settings) {
