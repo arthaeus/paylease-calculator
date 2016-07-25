@@ -76,13 +76,16 @@ class Calculator implements \SPLSubject
         return $this->IOutput;
     }
 
-    public function run()
+    public function input( \stdClass $input )
     {
         /**
          * at this point, run the input class input() method and this will populate the math problem to the input
          */
-
         $this->IInput->input(new \stdClass());
+    }
+
+    public function run()
+    {
         $this->message = $this->IAlgorithm->calculate($this->IInput->getMathProblem());
         $this->notify();
     }

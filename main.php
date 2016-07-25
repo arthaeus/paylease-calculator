@@ -10,8 +10,19 @@ $container->register( new CalculatorProvider() );
 
 $ICalculator = $container['ICalculator'];
 
+$ICalculator->input( new \stdClass() );
 $ICalculator->run();
 
-$ICalculator->setIAlgorithm($container['IAlgorithmSoap']);
+//
+$mathProblem = $ICalculator->getIInput()->getMathProblem();
+$mathProblem->x = 700;
+$mathProblem->y = 77;
+$ICalculator->getIInput()->setMathProblem( $mathProblem );
+//
 
+$ICalculator->setIAlgorithm($container['IAlgorithmSoap']);
+$ICalculator->run();
+
+
+$ICalculator->input( new \stdClass() );
 $ICalculator->run();
