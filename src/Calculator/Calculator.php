@@ -32,17 +32,6 @@ class Calculator implements \SPLSubject
         return $this->IInput;
     }
 
-    public function setMathProblem( \stdClass $problem )
-    {
-        $this->mathProblem = $problem;
-        return $this;
-    }
-
-    public function getMathProblem()
-    {
-        return $this->mathProblem;
-    }
-
     public function setMessage( $message )
     {
         $this->message = $message;

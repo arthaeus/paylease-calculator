@@ -21,7 +21,7 @@ $ICalculator->run();
 $mathProblem = $ICalculator->getIInput()->getMathProblem();
 $mathProblem->x = 700;
 $mathProblem->y = 77;
-$mathProblem->operation = "+";
+$mathProblem->operation = "*";
 $ICalculator->getIInput()->setMathProblem( $mathProblem );
 
 $ICalculator->run();
